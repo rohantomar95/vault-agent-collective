@@ -4,64 +4,64 @@
 
 @layer base {
   :root {
-    /* Ultra Modern Web3 Dark Theme - Inspired by beautiful gradients */
-    --background: 235 15% 4%;           /* Deep space black #0A0A0F */
-    --background-secondary: 235 20% 8%; /* Rich dark purple #0F0F18 */
-    --background-tertiary: 235 15% 12%; /* Card backgrounds #181820 */
+    /* Dark Theme - Inspired by screenshot colors */
+    --background: 220 15% 6%;           /* Very dark background #0F1115 */
+    --background-secondary: 220 15% 9%; /* Slightly lighter #151A20 */
+    --background-tertiary: 220 15% 12%; /* Card backgrounds #1A2027 */
     
     --foreground: 210 20% 98%;          /* Pure white text #FAFAFA */
-    --foreground-secondary: 210 15% 85%; /* Secondary text #D1D5DB */
+    --foreground-secondary: 210 15% 75%; /* Secondary text #B8BCC2 */
     
-    --card: 235 20% 8%;                 /* Card background */
+    --card: 220 15% 9%;                 /* Card background */
     --card-foreground: 210 20% 98%;     /* Card text */
     
-    --popover: 235 20% 8%;
+    --popover: 220 15% 9%;
     --popover-foreground: 210 20% 98%;
     
-    --primary: 280 100% 70%;            /* Vibrant purple #B845FF */
-    --primary-foreground: 0 0% 100%;    /* White text on purple */
-    --primary-muted: 280 80% 55%;       /* Muted purple #9932CC */
+    --primary: 142 70% 50%;             /* Green accent #10B981 */
+    --primary-foreground: 0 0% 100%;    /* White text on green */
+    --primary-muted: 142 60% 40%;       /* Muted green #059669 */
     
     --secondary: 210 15% 18%;           /* Dark secondary #252830 */
     --secondary-foreground: 210 20% 98%;
     
-    --muted: 235 15% 12%;
+    --muted: 220 15% 12%;
     --muted-foreground: 210 10% 65%;    /* Muted text #9CA3AF */
     
-    --accent: 200 100% 60%;             /* Electric blue accent #00BFFF */
+    --accent: 200 100% 50%;             /* Cyan blue accent #00BFFF */
     --accent-foreground: 0 0% 0%;
     
-    --destructive: 0 85% 58%;           /* Red for losses #E53E3E */
+    --destructive: 0 75% 60%;           /* Red for losses #E53E3E */
     --destructive-foreground: 210 20% 98%;
     
-    --success: 142 76% 55%;             /* Bright green for gains #10B981 */
+    --success: 142 70% 50%;             /* Bright green for gains #10B981 */
     --success-foreground: 0 0% 0%;
     
     --warning: 45 93% 58%;              /* Yellow warning #F59E0B */
     --warning-foreground: 0 0% 0%;
     
-    --border: 235 15% 20%;              /* Subtle borders #2A2A35 */
-    --border-light: 235 15% 30%;        /* Lighter borders #40404F */
+    --border: 220 15% 20%;              /* Subtle borders #2A2A35 */
+    --border-light: 220 15% 25%;        /* Lighter borders #353842 */
     
-    --input: 235 15% 15%;
-    --ring: 280 100% 70%;               /* Purple focus ring */
+    --input: 220 15% 15%;
+    --ring: 142 70% 50%;                /* Green focus ring */
     
     --radius: 1rem;                     /* 16px rounded corners */
     
-    /* Beautiful gradients inspired by reference images */
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%) 0%, hsl(200 100% 60%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(235 20% 8%) 0%, hsl(235 25% 12%) 100%);
-    --gradient-border: linear-gradient(135deg, hsl(280 100% 70% / 0.3) 0%, hsl(200 100% 60% / 0.3) 100%);
-    --gradient-cosmic: linear-gradient(135deg, hsl(280 100% 70%) 0%, hsl(200 100% 60%) 50%, hsl(280 100% 70%) 100%);
-    --gradient-mesh: radial-gradient(circle at 25% 25%, hsl(280 100% 70% / 0.15) 0%, transparent 50%), 
-                     radial-gradient(circle at 75% 75%, hsl(200 100% 60% / 0.1) 0%, transparent 50%);
-    --gradient-glass: linear-gradient(135deg, hsl(235 20% 8% / 0.7) 0%, hsl(235 25% 12% / 0.9) 100%);
+    /* Beautiful gradients with green/blue theme */
+    --gradient-primary: linear-gradient(135deg, hsl(142 70% 50%) 0%, hsl(200 100% 50%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 15% 9%) 0%, hsl(220 20% 12%) 100%);
+    --gradient-border: linear-gradient(135deg, hsl(142 70% 50% / 0.3) 0%, hsl(200 100% 50% / 0.3) 100%);
+    --gradient-cosmic: linear-gradient(135deg, hsl(142 70% 50%) 0%, hsl(200 100% 50%) 50%, hsl(142 70% 50%) 100%);
+    --gradient-mesh: radial-gradient(circle at 25% 25%, hsl(142 70% 50% / 0.15) 0%, transparent 50%), 
+                     radial-gradient(circle at 75% 75%, hsl(200 100% 50% / 0.1) 0%, transparent 50%);
+    --gradient-glass: linear-gradient(135deg, hsl(220 15% 9% / 0.7) 0%, hsl(220 20% 12% / 0.9) 100%);
     
-    /* Enhanced shadows with beautiful glows */
-    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.6);
-    --shadow-glow: 0 0 30px hsl(280 100% 70% / 0.4);
-    --shadow-glow-blue: 0 0 30px hsl(200 100% 60% / 0.4);
-    --shadow-glow-strong: 0 0 60px hsl(280 100% 70% / 0.6);
+    /* Enhanced shadows with green/blue glows */
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.8);
+    --shadow-glow: 0 0 30px hsl(142 70% 50% / 0.4);
+    --shadow-glow-blue: 0 0 30px hsl(200 100% 50% / 0.4);
+    --shadow-glow-strong: 0 0 60px hsl(142 70% 50% / 0.6);
     
     /* Smooth transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
