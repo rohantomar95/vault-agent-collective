@@ -2,8 +2,10 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, DollarSign, Zap, Shield } from 'lucide-react';
-
+import { TrendingUp } from 'lucide-react';
+import BuySellDialog from './BuySellDialog';
+import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 interface AgentCardProps {
   name: string;
   description: string;
@@ -47,6 +49,14 @@ const AgentCard: React.FC<AgentCardProps> = ({
   const getPerformanceColor = (perf: number) => {
     return perf >= 0 ? 'text-success' : 'text-destructive';
   };
+
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const parsePrice = (p: string) => parseFloat(p.replace(/[^0-9.]/g, '')) || 0;
+  const sharePriceNum = parsePrice(sharePrice);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [mode, setMode] = React.useState<'buy' | 'sell'>('buy');
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
   return (
     <Card className={`bg-card shadow-card border-border transition-smooth card-glow hover:border-primary/50 ${className}`}>
@@ -117,16 +127,43 @@ const AgentCard: React.FC<AgentCardProps> = ({
         
         <div className="pt-2 space-y-3">
           <div className="grid grid-cols-2 gap-3">
-            <Button className="bg-success hover:bg-success/90 transition-smooth text-background font-semibold">
+            <Button
+              className="bg-success hover:bg-success/90 transition-smooth text-background font-semibold"
+              onClick={() => { setMode('buy'); setDialogOpen(true); }}
+            >
               Buy Shares
             </Button>
-            <Button variant="outline" className="border-destructive text-destructive hover:bg-destructive hover:text-background transition-smooth">
+            <Button
+              variant="outline"
+              className="border-destructive text-destructive hover:bg-destructive hover:text-background transition-smooth"
+              onClick={() => { setMode('sell'); setDialogOpen(true); }}
+            >
               Sell Shares
             </Button>
           </div>
-          <Button variant="outline" className="w-full border-border-light hover:border-primary transition-smooth">
+          <Button
+            variant="outline"
+            className="w-full border-border-light hover:border-primary transition-smooth"
+            onClick={() => navigate(`/agents/${slug}`)}
+          >
             View Details
           </Button>
+          <BuySellDialog
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+            mode={mode}
+            sharePrice={sharePriceNum}
+            onConfirm={({ amount, shares }) => {
+              toast({
+                title: mode === 'buy' ? 'Buy order submitted' : 'Sell order submitted',
+                description:
+                  mode === 'buy'
+                    ? `Investing $${amount.toLocaleString()} for ~${shares.toLocaleString()} shares`
+                    : `Redeeming ~${shares.toLocaleString()} shares for $${amount.toLocaleString()}`,
+              });
+              setDialogOpen(false);
+            }}
+          />
         </div>
       </CardContent>
     </Card>
