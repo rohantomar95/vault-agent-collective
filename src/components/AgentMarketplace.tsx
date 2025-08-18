@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AgentCard from './AgentCard';
+import PortfolioOverview from './PortfolioOverview';
+import TransactionHistory from './TransactionHistory';
 import { agents } from '@/data/agents';
 
 const AgentMarketplace: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'marketplace' | 'portfolio' | 'history'>('marketplace');
   return (
     <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Ultra Modern Background */}
@@ -15,56 +18,94 @@ const AgentMarketplace: React.FC = () => {
       
       <section className="relative py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Ultra Modern Hero Header */}
-          <div className="text-center mb-20 space-y-12">
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-none">
-                <span className="text-gradient-cosmic block mb-4">AI TRADING</span>
-                <span className="text-foreground/90">AGENTS</span>
-              </h1>
-              <p className="text-lg md:text-xl text-foreground-secondary max-w-3xl mx-auto leading-relaxed font-medium">
-                Next-generation AI agents executing ultra-sophisticated trading strategies.<br/>
-                <span className="text-gradient-primary font-bold">Stake on elite performers and maximize your returns.</span>
-              </p>
-            </div>
-            
-            {/* Ultra Modern Stats Bar */}
-            <div className="relative">
-              <div className="absolute inset-0 gradient-primary opacity-10 rounded-3xl blur-xl"></div>
-              <div className="relative flex flex-wrap justify-center items-center gap-12 py-8 px-10 glass-card max-w-5xl mx-auto rounded-3xl border border-border-light/30">
-                <div className="text-center group">
-                  <div className="text-3xl md:text-4xl font-black text-gradient-primary font-mono mb-1">$127.3M</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">TOTAL TVL</div>
-                </div>
-                <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
-                <div className="text-center group">
-                  <div className="text-3xl md:text-4xl font-black text-success font-mono mb-1">+24.7%</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">24H PERFORMANCE</div>
-                </div>
-                <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
-                <div className="text-center group">
-                  <div className="text-3xl md:text-4xl font-black text-foreground font-mono mb-1">847</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">ACTIVE TRADERS</div>
-                </div>
-              </div>
+          {/* Navigation Tabs */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex items-center p-2 rounded-2xl bg-background-secondary/60 border border-border-light/30">
+              {[
+                { key: 'marketplace', label: 'Marketplace', count: agents.length },
+                { key: 'portfolio', label: 'Portfolio', count: 4 },
+                { key: 'history', label: 'History', count: 6 }
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key as any)}
+                  className={`relative px-8 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
+                    activeTab === tab.key
+                      ? 'bg-primary text-primary-foreground shadow-glow'
+                      : 'text-foreground-secondary hover:text-foreground hover:bg-background-secondary/80'
+                  }`}
+                >
+                  <span className="relative z-10">{tab.label}</span>
+                  <span className={`ml-2 px-2 py-1 rounded-full text-xs font-bold ${
+                    activeTab === tab.key
+                      ? 'bg-background-secondary/30 text-foreground'
+                      : 'bg-muted text-muted-foreground'
+                  }`}>
+                    {tab.count}
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Ultra Modern Agent Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-20">
-            {agents.map((agent, index) => (
-              <div 
-                key={agent.name} 
-                className="animate-fade-in" 
-                style={{ 
-                  animationDelay: `${index * 0.15}s`,
-                  animationFillMode: 'both'
-                }}
-              >
-                <AgentCard {...agent} />
+          {/* Tab Content */}
+          {activeTab === 'marketplace' && (
+            <>
+              {/* Hero Header */}
+              <div className="text-center mb-20 space-y-12">
+                <div className="space-y-6">
+                  <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-none">
+                    <span className="text-gradient-cosmic block mb-4">AI TRADING</span>
+                    <span className="text-foreground/90">AGENTS</span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-foreground-secondary max-w-3xl mx-auto leading-relaxed font-medium">
+                    Next-generation AI agents executing ultra-sophisticated trading strategies.<br/>
+                    <span className="text-gradient-primary font-bold">Stake on elite performers and maximize your returns.</span>
+                  </p>
+                </div>
+                
+                {/* Ultra Modern Stats Bar */}
+                <div className="relative">
+                  <div className="absolute inset-0 gradient-primary opacity-10 rounded-3xl blur-xl"></div>
+                  <div className="relative flex flex-wrap justify-center items-center gap-12 py-8 px-10 glass-card max-w-5xl mx-auto rounded-3xl border border-border-light/30">
+                    <div className="text-center group">
+                      <div className="text-3xl md:text-4xl font-black text-gradient-primary font-mono mb-1">$127.3M</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">TOTAL TVL</div>
+                    </div>
+                    <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
+                    <div className="text-center group">
+                      <div className="text-3xl md:text-4xl font-black text-success font-mono mb-1">+24.7%</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">24H PERFORMANCE</div>
+                    </div>
+                    <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
+                    <div className="text-center group">
+                      <div className="text-3xl md:text-4xl font-black text-foreground font-mono mb-1">847</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">ACTIVE TRADERS</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+
+              {/* Ultra Modern Agent Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-20">
+                {agents.map((agent, index) => (
+                  <div 
+                    key={agent.name} 
+                    className="animate-fade-in" 
+                    style={{ 
+                      animationDelay: `${index * 0.15}s`,
+                      animationFillMode: 'both'
+                    }}
+                  >
+                    <AgentCard {...agent} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {activeTab === 'portfolio' && <PortfolioOverview />}
+          {activeTab === 'history' && <TransactionHistory />}
 
           {/* Ultra Modern Bottom CTA Section */}
           <div className="text-center">
