@@ -13,6 +13,10 @@ interface AgentCardProps {
   category: string;
   performance: number;
   icon: React.ReactNode;
+  capitalDeployed: string;
+  sharePrice: string;
+  roi24h: number;
+  totalShares: string;
   className?: string;
 }
 
@@ -25,6 +29,10 @@ const AgentCard: React.FC<AgentCardProps> = ({
   category,
   performance,
   icon,
+  capitalDeployed,
+  sharePrice,
+  roi24h,
+  totalShares,
   className
 }) => {
   const getRiskColor = (risk: string) => {
@@ -66,7 +74,7 @@ const AgentCard: React.FC<AgentCardProps> = ({
           {description}
         </p>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div className="bg-background-secondary p-3 rounded-lg">
             <div className="text-xs text-muted-foreground uppercase tracking-wide">APY</div>
             <div className="text-lg font-bold text-accent">{apy}</div>
@@ -74,6 +82,26 @@ const AgentCard: React.FC<AgentCardProps> = ({
           <div className="bg-background-secondary p-3 rounded-lg">
             <div className="text-xs text-muted-foreground uppercase tracking-wide">TVL</div>
             <div className="text-lg font-bold">{tvl}</div>
+          </div>
+          <div className="bg-background-secondary p-3 rounded-lg">
+            <div className="text-xs text-muted-foreground uppercase tracking-wide">Capital</div>
+            <div className="text-sm font-bold">{capitalDeployed}</div>
+          </div>
+          <div className="bg-background-secondary p-3 rounded-lg">
+            <div className="text-xs text-muted-foreground uppercase tracking-wide">Share Price</div>
+            <div className="text-sm font-bold text-primary">{sharePrice}</div>
+          </div>
+        </div>
+        
+        <div className="bg-background-secondary p-3 rounded-lg">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs text-muted-foreground uppercase tracking-wide">24h ROI</span>
+            <span className={`text-sm font-bold ${roi24h >= 0 ? 'text-success' : 'text-destructive'}`}>
+              {roi24h > 0 ? '+' : ''}{roi24h}%
+            </span>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Total Shares: {totalShares}</span>
           </div>
         </div>
         
@@ -87,9 +115,17 @@ const AgentCard: React.FC<AgentCardProps> = ({
           </div>
         </div>
         
-        <div className="pt-2">
-          <Button className="w-full bg-primary hover:bg-primary-light transition-smooth shadow-glow">
-            Invest Now
+        <div className="pt-2 space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <Button className="bg-success hover:bg-success/90 transition-smooth text-background font-semibold">
+              Buy Shares
+            </Button>
+            <Button variant="outline" className="border-destructive text-destructive hover:bg-destructive hover:text-background transition-smooth">
+              Sell Shares
+            </Button>
+          </div>
+          <Button variant="outline" className="w-full border-border-light hover:border-primary transition-smooth">
+            View Details
           </Button>
         </div>
       </CardContent>

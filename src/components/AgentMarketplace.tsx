@@ -12,6 +12,10 @@ const AgentMarketplace: React.FC = () => {
       risk: "Medium" as const,
       category: "Yield Farming",
       performance: 18.7,
+      capitalDeployed: "$8.2M",
+      sharePrice: "$1.24",
+      roi24h: 2.3,
+      totalShares: "10.3M",
       icon: <TrendingUp className="h-6 w-6" />
     },
     {
@@ -22,6 +26,10 @@ const AgentMarketplace: React.FC = () => {
       risk: "Low" as const,
       category: "Arbitrage",
       performance: 12.3,
+      capitalDeployed: "$6.8M",
+      sharePrice: "$1.68",
+      roi24h: 1.8,
+      totalShares: "5.0M",
       icon: <Zap className="h-6 w-6" />
     },
     {
@@ -32,6 +40,10 @@ const AgentMarketplace: React.FC = () => {
       risk: "Low" as const,
       category: "Portfolio Management",
       performance: 9.4,
+      capitalDeployed: "$12.1M",
+      sharePrice: "$1.08",
+      roi24h: 0.9,
+      totalShares: "14.1M",
       icon: <BarChart3 className="h-6 w-6" />
     },
     {
@@ -42,6 +54,10 @@ const AgentMarketplace: React.FC = () => {
       risk: "High" as const,
       category: "MEV",
       performance: 28.9,
+      capitalDeployed: "$4.2M",
+      sharePrice: "$2.45",
+      roi24h: 4.2,
+      totalShares: "2.5M",
       icon: <Target className="h-6 w-6" />
     },
     {
@@ -52,6 +68,10 @@ const AgentMarketplace: React.FC = () => {
       risk: "Medium" as const,
       category: "Options Trading",
       performance: 15.2,
+      capitalDeployed: "$7.8M",
+      sharePrice: "$1.32",
+      roi24h: 1.5,
+      totalShares: "7.3M",
       icon: <Shield className="h-6 w-6" />
     },
     {
@@ -62,12 +82,16 @@ const AgentMarketplace: React.FC = () => {
       risk: "Low" as const,
       category: "Risk Management",
       performance: 6.1,
+      capitalDeployed: "$18.9M",
+      sharePrice: "$1.05",
+      roi24h: 0.3,
+      totalShares: "21.0M",
       icon: <AlertTriangle className="h-6 w-6" />
     }
   ];
 
-  return (
-    <section className="py-20 px-6 bg-background-secondary">
+return (
+    <section className="py-16 px-6 bg-background min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-6">
@@ -93,6 +117,10 @@ const AgentMarketplace: React.FC = () => {
                 risk={agent.risk}
                 category={agent.category}
                 performance={agent.performance}
+                capitalDeployed={agent.capitalDeployed}
+                sharePrice={agent.sharePrice}
+                roi24h={agent.roi24h}
+                totalShares={agent.totalShares}
                 icon={agent.icon}
               />
             </div>
