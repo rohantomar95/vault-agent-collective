@@ -54,88 +54,101 @@ const AgentCard: React.FC<AgentCardProps> = ({
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
   return (
-    <div className="trading-card group hover:scale-[1.02] transition-spring">
+    <div className="agent-card group">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="w-full h-full gradient-primary rounded-2xl"></div>
+      </div>
+      
       {/* Header with Agent Info */}
-      <div className="flex items-start justify-between mb-6">
+      <div className="relative flex items-start justify-between mb-6">
         <div className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-smooth">
-            {icon}
+          <div className="relative p-4 rounded-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute inset-0 gradient-primary opacity-20"></div>
+            <div className="relative text-primary">
+              {icon}
+            </div>
           </div>
           <div>
-            <h3 className="text-xl font-bold text-foreground mb-1">{name}</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-background-secondary border border-border-light text-foreground-secondary">
+            <h3 className="text-xl font-bold text-foreground mb-2">{name}</h3>
+            <div className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
               {category}
-            </span>
+            </div>
           </div>
         </div>
-        <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getRiskColor(risk)}`}>
-          {risk} Risk
+        <div className={`px-3 py-1.5 rounded-full text-xs font-bold border ${getRiskColor(risk)}`}>
+          {risk}
         </div>
       </div>
       
       {/* Description */}
-      <p className="text-sm text-foreground-secondary leading-relaxed mb-6">
-        {description}
-      </p>
+      <div className="relative mb-6">
+        <p className="text-sm text-foreground-secondary leading-relaxed">
+          {description}
+        </p>
+      </div>
+      
+      {/* APY Display */}
+      <div className="relative mb-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
+        <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">APY</div>
+        <div className="text-2xl font-bold text-gradient-primary font-mono">{apy}</div>
+      </div>
       
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="bg-background-secondary/80 p-4 rounded-xl border border-border">
-          <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">APY</div>
-          <div className="text-lg font-bold text-primary font-mono">{apy}</div>
-        </div>
-        <div className="bg-background-secondary/80 p-4 rounded-xl border border-border">
+        <div className="relative p-4 rounded-xl bg-background-secondary/60 border border-border-light/50 backdrop-blur-sm">
           <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">TVL</div>
-          <div className="text-lg font-bold font-mono">{tvl}</div>
+          <div className="text-lg font-bold font-mono text-foreground">{tvl}</div>
         </div>
-        <div className="bg-background-secondary/80 p-4 rounded-xl border border-border">
+        <div className="relative p-4 rounded-xl bg-background-secondary/60 border border-border-light/50 backdrop-blur-sm">
           <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Capital</div>
-          <div className="text-sm font-bold font-mono">{capitalDeployed}</div>
+          <div className="text-lg font-bold font-mono text-foreground">{capitalDeployed}</div>
         </div>
-        <div className="bg-background-secondary/80 p-4 rounded-xl border border-border">
+        <div className="relative p-4 rounded-xl bg-background-secondary/60 border border-border-light/50 backdrop-blur-sm">
           <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Share Price</div>
-          <div className="text-sm font-bold text-primary font-mono">{sharePrice}</div>
+          <div className="text-lg font-bold text-accent font-mono">{sharePrice}</div>
+        </div>
+        <div className="relative p-4 rounded-xl bg-background-secondary/60 border border-border-light/50 backdrop-blur-sm">
+          <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">24h ROI</div>
+          <div className={`text-lg font-bold font-mono ${roi24h >= 0 ? 'text-success' : 'text-destructive'}`}>
+            {roi24h > 0 ? '+' : ''}{roi24h}%
+          </div>
         </div>
       </div>
       
-      {/* Performance Section */}
-      <div className="bg-background-secondary/80 p-4 rounded-xl border border-border mb-6">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xs text-muted-foreground uppercase tracking-wide">24h Performance</span>
-          <span className={`text-lg font-bold font-mono ${roi24h >= 0 ? 'text-success' : 'text-destructive'}`}>
-            {roi24h > 0 ? '+' : ''}{roi24h}%
-          </span>
-        </div>
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>Total Shares</span>
-          <span className="font-mono">{totalShares}</span>
+      {/* Total Shares */}
+      <div className="relative p-4 rounded-xl bg-background-secondary/40 border border-border-light/30 mb-6">
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-muted-foreground uppercase tracking-wide">Total Shares</span>
+          <span className="font-mono text-sm font-bold text-foreground">{totalShares}</span>
         </div>
       </div>
       
       {/* Action Buttons */}
-      <div className="space-y-3">
+      <div className="relative space-y-3">
         <div className="grid grid-cols-2 gap-3">
-          <Button
-            className="bg-success hover:bg-success/90 text-success-foreground font-semibold transition-smooth shadow-glow"
+          <button
+            className="relative overflow-hidden px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 group bg-success/90 hover:bg-success text-white shadow-glow"
             onClick={() => { setMode('buy'); setDialogOpen(true); }}
           >
-            Buy Shares
-          </Button>
-          <Button
-            variant="outline"
-            className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-smooth"
+            <div className="absolute inset-0 bg-gradient-to-r from-success to-success/80 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="relative">Buy</span>
+          </button>
+          <button
+            className="relative overflow-hidden px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 group bg-destructive/20 hover:bg-destructive/30 text-destructive border border-destructive/30"
             onClick={() => { setMode('sell'); setDialogOpen(true); }}
           >
-            Sell Shares
-          </Button>
+            <div className="absolute inset-0 bg-gradient-to-r from-destructive/20 to-destructive/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="relative">Sell</span>
+          </button>
         </div>
-        <Button
-          variant="outline"
-          className="w-full border-border-light hover:border-primary hover:text-primary transition-smooth"
+        <button
+          className="relative w-full overflow-hidden px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 group bg-background-secondary/40 hover:bg-background-secondary/60 text-foreground border border-border-light/50 hover:border-primary/50"
           onClick={() => navigate(`/agents/${slug}`)}
         >
-          View Details
-        </Button>
+          <div className="absolute inset-0 gradient-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
+          <span className="relative">View Details</span>
+        </button>
         
         <BuySellDialog
           open={dialogOpen}
