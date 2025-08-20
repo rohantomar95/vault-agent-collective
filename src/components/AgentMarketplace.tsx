@@ -51,36 +51,65 @@ const AgentMarketplace: React.FC = () => {
           {/* Tab Content */}
           {activeTab === 'marketplace' && (
             <>
-              {/* Hero Header */}
-              <div className="text-center mb-20 space-y-12">
-                <div className="space-y-6">
-                  <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-none">
-                    <span className="text-gradient-cosmic block mb-4">AI TRADING</span>
-                    <span className="text-foreground/90">AGENTS</span>
-                  </h1>
-                  <p className="text-lg md:text-xl text-foreground-secondary max-w-3xl mx-auto leading-relaxed font-medium">
-                    Next-generation AI agents executing ultra-sophisticated trading strategies.<br/>
-                    <span className="text-gradient-primary font-bold">Stake on elite performers and maximize your returns.</span>
-                  </p>
-                </div>
-                
-                {/* Ultra Modern Stats Bar */}
-                <div className="relative">
-                  <div className="absolute inset-0 gradient-primary opacity-10 rounded-3xl blur-xl"></div>
-                  <div className="relative flex flex-wrap justify-center items-center gap-12 py-8 px-10 glass-card max-w-5xl mx-auto rounded-3xl border border-border-light/30">
-                    <div className="text-center group">
-                      <div className="text-3xl md:text-4xl font-black text-gradient-primary font-mono mb-1">$127.3M</div>
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">TOTAL TVL</div>
+              {/* Advanced Filters */}
+              <div className="mb-12">
+                <div className="glass-card rounded-2xl p-6 border border-border-light/30 max-w-7xl mx-auto">
+                  <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+                    {/* Search and Quick Filters */}
+                    <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                      <div className="relative flex-1 max-w-md">
+                        <input
+                          type="text"
+                          placeholder="Search agents..."
+                          className="w-full px-4 py-3 pl-12 rounded-xl bg-background-secondary/60 border border-border-light/30 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                        />
+                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-3 flex-wrap">
+                        {['All', 'High Returns', 'Low Risk', 'New', 'Popular'].map((filter) => (
+                          <button
+                            key={filter}
+                            className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                              filter === 'All'
+                                ? 'bg-primary text-primary-foreground shadow-glow'
+                                : 'bg-background-secondary/60 text-foreground-secondary hover:text-foreground hover:bg-background-secondary border border-border-light/30 hover:border-primary/30'
+                            }`}
+                          >
+                            {filter}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
-                    <div className="text-center group">
-                      <div className="text-3xl md:text-4xl font-black text-success font-mono mb-1">+24.7%</div>
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">24H PERFORMANCE</div>
-                    </div>
-                    <div className="w-px h-16 bg-gradient-to-b from-transparent via-border-light to-transparent hidden md:block" />
-                    <div className="text-center group">
-                      <div className="text-3xl md:text-4xl font-black text-foreground font-mono mb-1">847</div>
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider font-bold">ACTIVE TRADERS</div>
+
+                    {/* Advanced Filter Dropdowns */}
+                    <div className="flex gap-4 items-center">
+                      <select className="px-4 py-3 rounded-xl bg-background-secondary/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all">
+                        <option value="">Sort by Performance</option>
+                        <option value="performance">Highest Returns</option>
+                        <option value="risk">Lowest Risk</option>
+                        <option value="volume">Highest Volume</option>
+                        <option value="newest">Newest</option>
+                      </select>
+                      
+                      <select className="px-4 py-3 rounded-xl bg-background-secondary/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all">
+                        <option value="">Risk Level</option>
+                        <option value="low">Low Risk</option>
+                        <option value="medium">Medium Risk</option>
+                        <option value="high">High Risk</option>
+                      </select>
+
+                      <select className="px-4 py-3 rounded-xl bg-background-secondary/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all">
+                        <option value="">Strategy Type</option>
+                        <option value="arbitrage">Arbitrage</option>
+                        <option value="momentum">Momentum</option>
+                        <option value="scalping">Scalping</option>
+                        <option value="swing">Swing Trading</option>
+                      </select>
                     </div>
                   </div>
                 </div>
