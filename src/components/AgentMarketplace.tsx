@@ -219,29 +219,6 @@ const AgentMarketplace: React.FC = () => {
           {activeTab === 'portfolio' && <PortfolioOverview />}
           {activeTab === 'history' && <TransactionHistory />}
 
-          {/* Ultra Modern Bottom CTA Section */}
-          <div className="text-center">
-            <div className="relative max-w-4xl mx-auto">
-              <div className="absolute inset-0 gradient-primary opacity-5 rounded-3xl blur-2xl"></div>
-              <div className="relative glass-card rounded-3xl p-12 border border-border-light/30">
-                <h3 className="text-3xl md:text-4xl font-black mb-6 text-gradient-cosmic">Need a Custom Strategy?</h3>
-                <p className="text-lg text-foreground-secondary mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Our elite AI can architect personalized trading agents precisely tailored to your risk profile and investment objectives.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                  <button className="relative overflow-hidden px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-500 hover:scale-105 group shadow-glow-strong">
-                    <div className="absolute inset-0 gradient-primary"></div>
-                    <div className="absolute inset-0 gradient-cosmic opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <span className="relative text-white">Request Custom Agent</span>
-                  </button>
-                  <button className="relative overflow-hidden px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-500 hover:scale-105 group bg-background-secondary/40 hover:bg-background-secondary/60 text-foreground border border-border-light/50 hover:border-primary/50">
-                    <div className="absolute inset-0 gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                    <span className="relative">Explore All Strategies</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </main>
