@@ -3,9 +3,20 @@ import AgentCard from './AgentCard';
 import PortfolioOverview from './PortfolioOverview';
 import TransactionHistory from './TransactionHistory';
 import { agents } from '@/data/agents';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
+import { ChevronDown } from 'lucide-react';
 
 const AgentMarketplace: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'marketplace' | 'portfolio' | 'history'>('marketplace');
+  const [sortBy, setSortBy] = useState('Sort by Performance');
+  const [riskLevel, setRiskLevel] = useState('Risk Level');
+  const [strategyType, setStrategyType] = useState('Strategy Type');
+  const [market, setMarket] = useState('Market');
   return (
     <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Ultra Modern Background */}
@@ -90,36 +101,98 @@ const AgentMarketplace: React.FC = () => {
 
                     {/* Advanced Filters Row */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                      <select className="px-4 py-3 rounded-xl bg-background/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-sm">
-                        <option value="">Sort by Performance</option>
-                        <option value="performance">Highest Returns</option>
-                        <option value="risk">Lowest Risk</option>
-                        <option value="volume">Highest Volume</option>
-                        <option value="newest">Newest</option>
-                      </select>
+                      {/* Sort By Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-background/80 border border-border-light/30 text-foreground hover:border-primary/50 transition-all text-sm font-medium">
+                          <span className={sortBy === 'Sort by Performance' ? 'text-muted-foreground' : 'text-foreground'}>
+                            {sortBy}
+                          </span>
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 bg-background border-border-light/30 shadow-glow z-50">
+                          <DropdownMenuItem onClick={() => setSortBy('Highest Returns')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            Highest Returns
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setSortBy('Lowest Risk')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            Lowest Risk
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setSortBy('Highest Volume')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            Highest Volume
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setSortBy('Newest')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            Newest
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                       
-                      <select className="px-4 py-3 rounded-xl bg-background/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-sm">
-                        <option value="">Risk Level</option>
-                        <option value="low">Low Risk</option>
-                        <option value="medium">Medium Risk</option>
-                        <option value="high">High Risk</option>
-                      </select>
+                      {/* Risk Level Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-background/80 border border-border-light/30 text-foreground hover:border-primary/50 transition-all text-sm font-medium">
+                          <span className={riskLevel === 'Risk Level' ? 'text-muted-foreground' : 'text-foreground'}>
+                            {riskLevel}
+                          </span>
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 bg-background border-border-light/30 shadow-glow z-50">
+                          <DropdownMenuItem onClick={() => setRiskLevel('Low Risk')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🟢 Low Risk
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setRiskLevel('Medium Risk')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🟡 Medium Risk
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setRiskLevel('High Risk')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🔴 High Risk
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
 
-                      <select className="px-4 py-3 rounded-xl bg-background/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-sm">
-                        <option value="">Strategy Type</option>
-                        <option value="arbitrage">Arbitrage</option>
-                        <option value="momentum">Momentum</option>
-                        <option value="scalping">Scalping</option>
-                        <option value="swing">Swing Trading</option>
-                      </select>
+                      {/* Strategy Type Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-background/80 border border-border-light/30 text-foreground hover:border-primary/50 transition-all text-sm font-medium">
+                          <span className={strategyType === 'Strategy Type' ? 'text-muted-foreground' : 'text-foreground'}>
+                            {strategyType}
+                          </span>
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 bg-background border-border-light/30 shadow-glow z-50">
+                          <DropdownMenuItem onClick={() => setStrategyType('Arbitrage')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            ⚡ Arbitrage
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setStrategyType('Momentum')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            📈 Momentum
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setStrategyType('Scalping')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🎯 Scalping
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setStrategyType('Swing Trading')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🔄 Swing Trading
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
 
-                      <select className="px-4 py-3 rounded-xl bg-background/60 border border-border-light/30 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-sm">
-                        <option value="">Market</option>
-                        <option value="crypto">Crypto</option>
-                        <option value="forex">Forex</option>
-                        <option value="stocks">Stocks</option>
-                        <option value="commodities">Commodities</option>
-                      </select>
+                      {/* Market Dropdown */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-background/80 border border-border-light/30 text-foreground hover:border-primary/50 transition-all text-sm font-medium">
+                          <span className={market === 'Market' ? 'text-muted-foreground' : 'text-foreground'}>
+                            {market}
+                          </span>
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 bg-background border-border-light/30 shadow-glow z-50">
+                          <DropdownMenuItem onClick={() => setMarket('Crypto')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            ₿ Crypto
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setMarket('Forex')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            💱 Forex
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setMarket('Stocks')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            📈 Stocks
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setMarket('Commodities')} className="hover:bg-primary/10 hover:text-primary cursor-pointer">
+                            🥇 Commodities
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </div>
                 </div>
